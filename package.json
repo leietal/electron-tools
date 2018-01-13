@@ -1,0 +1,27 @@
+{
+  "name": "electron-tools",
+  "version": "1.0.0",
+  "description": "雷佳佳的工具箱",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-packager ./ --overwrite -all"
+  },
+  "author": "雷佳佳",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "asar": "^0.14.0",
+    "electron": "^1.7.10",
+    "electron-builder": "^19.52.1",
+    "electron-package": "^0.1.0"
+  },
+  "build": {
+    "appId": "com.leijiaping.electron-tools",
+    "copyright": "雷佳佳",
+    "productName": "雷佳佳的工具箱",
+    "win": {
+      "icon": "icon_256.ico"
+    }
+  },
+  "dependencies": {}
+}

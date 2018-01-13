@@ -1,0 +1,4 @@
+/node_modules
+/electron-tools-win32-x64
+/dist
+package-lock.json
