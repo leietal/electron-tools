@@ -4,6 +4,8 @@ const Tray = electron.Tray
 const Menu = electron.Menu
 const nativeImage = electron.nativeImage
 const BrowserWindow = electron.BrowserWindow
+const globalShortcut = electron.globalShortcut;
+const clipboard = electron.clipboard;
 
 const path = require('path')
 const url = require('url')
@@ -19,13 +21,15 @@ function createWindow() {
     minWidth: 600,
     minHeight: 200,
     title: "雷佳佳的工具箱",
+    // frame: false,
+    // transparent: true,
     icon: path.join(__dirname, 'icon_48.ico')
   }
   mainWindow = new BrowserWindow(opt)
 
   // 加载一个本地页面
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'demo.html'),
     protocol: 'file:',
     slashes: true
   }));
@@ -39,7 +43,7 @@ function createWindow() {
   mainWindow.setProgressBar(0);
 
   // 不显示菜单
-  mainWindow.setMenu(null);
+  // mainWindow.setMenu(null);
 
   // ------------ 设置系统托盘 ------------
   var trayMenuTemplate = [{
@@ -58,7 +62,20 @@ function createWindow() {
   tray.setContextMenu(contextMenu);
   // 系统托盘提示标题
   tray.setToolTip('雷佳佳的工具箱');
+
+  var webContents = mainWindow.webContents;
+
+  // 注册一个快捷键
+  // globalShortcut.register("ctrl+1", function(){
+  //   var data = clipboard.readText();
+  //   webContents.send("clipboard-write", data);
+  // });
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
 }
+
 
 // 加载完成后创建一个新的窗口
 app.on('ready', createWindow)
@@ -75,7 +92,3 @@ app.on('activate', function() {
     createWindow()
   }
 })
-
-ipc.on('online-status-changed', function(event, status) {
-  console.log(status);
-});
