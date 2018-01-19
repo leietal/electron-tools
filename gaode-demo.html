@@ -35,6 +35,7 @@
           justify-content: space-between;
         }
         .panel{
+          display: none;
           background-color: rgba(0, 0, 0, .7);
           border: 2px solid rgb(9, 24, 38);
         }
@@ -138,7 +139,7 @@
         map.setZoomAndCenter(14, lineArr[i++]);
 
         // 开始运动
-        marker.moveAlong(lineArr, 3000);
+        marker.moveAlong(lineArr, 10000);
     </script>
 </body>
 

@@ -16,11 +16,14 @@ let mainWindow
 // 创建新的窗口
 function createWindow() {
   let opt = {
-    width: 1000,
-    height: 400,
-    minWidth: 600,
-    minHeight: 200,
-    title: "雷佳佳的工具箱",
+    // width: 1000,
+    // height: 400,
+    // minWidth: 800,
+    // minHeight: 300,
+    // fullscreen: true,
+    minimizable: true,
+    maximizable: true,
+    title: "高德地图DEMO",
     // frame: false,
     // transparent: true,
     icon: path.join(__dirname, 'icon_48.ico')
@@ -29,7 +32,7 @@ function createWindow() {
 
   // 加载一个本地页面
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'demo.html'),
+    pathname: path.join(__dirname, 'gaode-demo.html'),
     protocol: 'file:',
     slashes: true
   }));
@@ -61,7 +64,7 @@ function createWindow() {
   var contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
   tray.setContextMenu(contextMenu);
   // 系统托盘提示标题
-  tray.setToolTip('雷佳佳的工具箱');
+  tray.setToolTip('高德地图DEMO');
 
   var webContents = mainWindow.webContents;
 
