@@ -1,13 +1,13 @@
 {
-  "name": "electron-tools",
+  "name": "qiji",
   "version": "1.0.0",
-  "description": "高德地图DEMO",
+  "description": "骑迹",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-packager ./ --overwrite -all"
   },
-  "author": "雷佳佳",
+  "author": "雷佳平",
   "license": "CC0-1.0",
   "devDependencies": {
     "asar": "^0.14.0",
@@ -16,9 +16,9 @@
     "electron-package": "^0.1.0"
   },
   "build": {
-    "appId": "com.leijiaping.electron-tools",
-    "copyright": "雷佳佳",
-    "productName": "高德地图DEMO",
+    "appId": "com.leijiaping.qiji",
+    "copyright": "雷佳平",
+    "productName": "骑迹",
     "win": {
       "icon": "icon_256.ico"
     }

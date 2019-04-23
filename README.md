@@ -1,23 +1,15 @@
-### electron-tools
-> 学习的一些demo
+### 骑轨
 
-### electron的demo
-> electron-demo.html<br>
-相关文档：https://electronjs.org/docs
+**electron文档：**[https://electronjs.org/docs](https://electronjs.org/docs)
 
-
-### 高德地图的demo
-> gaode-demo.html<br>
-相关文档：http://lbs.amap.com/
-
-
+**高德地图文档：**[http://lbs.amap.com/](http://lbs.amap.com/)
 
 
 ## 使用说明
 
 1. 进入项目目录
 ```
-cd electron-tools
+cd qiji
 ```
 
 2. 安装依赖

@@ -23,7 +23,7 @@ function createWindow() {
     // fullscreen: true,
     minimizable: true,
     maximizable: true,
-    title: "高德地图DEMO",
+    title: "骑迹",
     // frame: false,
     // transparent: true,
     icon: path.join(__dirname, 'icon_48.ico')
@@ -32,7 +32,7 @@ function createWindow() {
 
   // 加载一个本地页面
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'gaode-demo.html'),
+    pathname: path.join(__dirname, 'gaode.html'),
     protocol: 'file:',
     slashes: true
   }));
@@ -64,7 +64,7 @@ function createWindow() {
   var contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
   tray.setContextMenu(contextMenu);
   // 系统托盘提示标题
-  tray.setToolTip('高德地图DEMO');
+  tray.setToolTip('骑迹');
 
   var webContents = mainWindow.webContents;
 
