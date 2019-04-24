@@ -1,11 +1,12 @@
 {
   "name": "qiji",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "骑迹",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-packager ./ --overwrite -all"
+    "pack": "electron-packager ./ --overwrite -all",
+    "dist": "electron-builder --win --x64"
   },
   "author": "雷佳平",
   "license": "CC0-1.0",

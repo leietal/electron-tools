@@ -1,146 +1,93 @@
 <!doctype html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <style type="text/css">
-        body,
-        html,
-        #container {
-            height: 100%;
-            margin: 0px;
-        }
-        .panel-container{
-          display: flex;
-          justify-content: space-between;
-          align-items: stretch;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-        .panel-container-center{
-          flex-grow: 1;
-          flex-shrink: 0;
-        }
-        .panel-container-right,
-        .panel-container-left{
-          display: flex;
-          flex-direction: column;
-          width: 400px;
-          flex-grow: 0;
-          flex-shrink: 0;
-          justify-content: space-between;
-        }
-        .panel{
-          display: none;
-          background-color: rgba(0, 0, 0, .7);
-          border: 2px solid rgb(9, 24, 38);
-          color: #fd6500;
-        }
-        .panel-log{
-          margin: 50px;
-          height: 500px;
-        }
-        .panel-audio{
-          margin: 50px;
-          height: 300px;
-        }
-        .panel-vodie{
-          margin: 50px;
-          height: 300px;
-        }
-        .panel-info{
-          margin: 50px;
-          height: 600px;
-        }
-    </style>
-    <title>我爱骑行</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <style type="text/css">
+    body,
+    html,
+    #container {
+      height: 100%;
+      margin: 0px;
+    }
+  </style>
+  <title>骑迹</title>
 </head>
 
 <body>
-    <div id="container" tabindex="0"></div>
-    <div class="panel-container">
-      <div class="panel-container-left">
-        <div class="panel panel-log"></div>
-        <div class="panel panel-audio"></div>
-      </div>
-      <div class="panel-container-center"></div>
-      <div class="panel-container-right">
-        <div class="panel panel-vodie"></div>
-        <div class="panel panel-info"></div>
-      </div>
-    </div>
-    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=4449b3a5859ddcc056dfb2bbf65b9630"></script>
-    <script type="text/javascript">
-        const fs = require('fs');
-        var result = JSON.parse(fs.readFileSync("data.json"));
+  <div id="container" tabindex="0"></div>
+  <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=4449b3a5859ddcc056dfb2bbf65b9630">
+  </script>
+  <script type="text/javascript">
+    const fs = require('fs');
+    var result = JSON.parse(fs.readFileSync(`${__dirname}/data.json`));
 
-        var lineArr = [];
-        result.forEach((trkpt, index) => {
-            if (index % 5 != 0) { return; }
-            lineArr.push([trkpt.lon, trkpt.lat]);
-        });
+    var lineArr = [];
+    result.forEach((trkpt, index) => {
+      if (index % 5 != 0) {
+        return;
+      }
+      lineArr.push([trkpt.lon, trkpt.lat]);
+    });
 
-        var map = new AMap.Map('container', {
-            resizeEnable: true,
-            dragEnable: true,
-            keyboardEnable: false,
-            doubleClickZoom: false
-        });
+    var map = new AMap.Map('container', {
+      resizeEnable: true,
+      dragEnable: true,
+      keyboardEnable: false,
+      doubleClickZoom: false
+    });
 
 
-        // 设置地图上要显示的东西
-        map.setFeatures(["road", "bg"]);//单一种类要素显示
+    // 设置地图上要显示的东西
+    map.setFeatures(["road", "bg"]); //单一种类要素显示
 
-        // 设置地图样式
-        map.setMapStyle('amap://styles/darkblue');
+    // 设置地图样式
+    map.setMapStyle('amap://styles/darkblue');
 
-        marker = new AMap.Marker({
-            map: map,
-            position: lineArr[0],
-            icon: "head.jpg",
-            offset: new AMap.Pixel(-19, -19),
-            // autoRotation: true
-        });
+    marker = new AMap.Marker({
+      map: map,
+      position: lineArr[0],
+      icon: "head.jpg",
+      offset: new AMap.Pixel(-19, -19),
+      // autoRotation: true
+    });
 
-        // 绘制轨迹样式
-        var polyline = new AMap.Polyline({
-            map: map,
-            path: lineArr,
-            strokeColor: "#50e3c2",  //线颜色
-            strokeOpacity: .3,     //线透明度
-            strokeWeight: 2,      //线宽
-            strokeStyle: "solid"  //线样式
-        });
+    // 绘制轨迹样式
+    var polyline = new AMap.Polyline({
+      map: map,
+      path: lineArr,
+      strokeColor: "#50e3c2", //线颜色
+      strokeOpacity: .3, //线透明度
+      strokeWeight: 2, //线宽
+      strokeStyle: "solid" //线样式
+    });
 
-        // 运动之后的轨迹样式
-        var passedPolyline = new AMap.Polyline({
-            map: map,
-            // path: lineArr,
-            strokeColor: "#50e3c2",  //线颜色
-            strokeOpacity: 1,     //线透明度
-            strokeWeight: 4,      //线宽
-            strokeStyle: "solid"  //线样式
-        });
+    // 运动之后的轨迹样式
+    var passedPolyline = new AMap.Polyline({
+      map: map,
+      // path: lineArr,
+      strokeColor: "#50e3c2", //线颜色
+      strokeOpacity: 1, //线透明度
+      strokeWeight: 4, //线宽
+      strokeStyle: "solid" //线样式
+    });
 
-        marker.on('moving', function (e) {
-            passedPolyline.setPath(e.passedPath);
-        });
+    marker.on('moving', function (e) {
+      passedPolyline.setPath(e.passedPath);
+    });
 
-        var i = 0;
+    var i = 0;
 
-        marker.on('moveend', function (e) {
-            map.setZoomAndCenter(14, lineArr[i++]);
-        });
+    marker.on('moveend', function (e) {
+      map.setZoomAndCenter(14, lineArr[i++]);
+    });
 
-        map.setZoomAndCenter(14, lineArr[i++]);
+    map.setZoomAndCenter(14, lineArr[i++]);
 
-        // 开始运动
-        marker.moveAlong(lineArr, 10000);
-    </script>
+    // 开始运动
+    marker.moveAlong(lineArr, 10000);
+  </script>
 </body>
 
 </html>

@@ -22,9 +22,9 @@ function createWindow() {
     minHeight: 300,
     // fullscreen: true,
     minimizable: true,
-    maximizable: false,
+    maximizable: true,
     title: "骑迹",
-    // frame: false,
+    frame: false,
     // transparent: true,
     icon: path.join(__dirname, "icon_48.ico")
   };
@@ -40,25 +40,26 @@ function createWindow() {
   );
 
   // 监听窗口关闭事件
-  mainWindow.on("closed", function() {
+  mainWindow.on("closed", function () {
     mainWindow = null;
   });
 
   // 设置进度条
-  mainWindow.setProgressBar(0);
+  mainWindow.setProgressBar(10);
 
   // 不显示菜单
-  mainWindow.setMenu(null);
+  // mainWindow.setMenu(null);
 
   // ------------ 设置系统托盘 ------------
-  var trayMenuTemplate = [
-    {
+  var trayMenuTemplate = [{
       label: "设置",
-      click: function() {}
+      click: function () {}
     },
     {
       label: "退出",
-      click: function() {}
+      click: function () {
+        app.quit();
+      }
     }
   ];
   // 系统托盘图标
@@ -86,13 +87,13 @@ function createWindow() {
 app.on("ready", createWindow);
 
 // 关闭所有窗口事件
-app.on("window-all-closed", function() {
+app.on("window-all-closed", function () {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on("activate", function() {
+app.on("activate", function () {
   if (mainWindow === null) {
     createWindow();
   }
