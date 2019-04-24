@@ -1,55 +1,58 @@
-const electron = require('electron')
-const app = electron.app
-const Tray = electron.Tray
-const Menu = electron.Menu
-const nativeImage = electron.nativeImage
-const BrowserWindow = electron.BrowserWindow
+const electron = require("electron");
+const app = electron.app;
+const Tray = electron.Tray;
+const Menu = electron.Menu;
+const nativeImage = electron.nativeImage;
+const BrowserWindow = electron.BrowserWindow;
 const globalShortcut = electron.globalShortcut;
 const clipboard = electron.clipboard;
 
-const path = require('path')
-const url = require('url')
-const ipc = electron.ipcMain
+const path = require("path");
+const url = require("url");
+const ipc = electron.ipcMain;
 
-let mainWindow
+let mainWindow;
 
 // 创建新的窗口
 function createWindow() {
   let opt = {
-    // width: 1000,
-    // height: 400,
-    // minWidth: 800,
-    // minHeight: 300,
+    width: 1000,
+    height: 400,
+    minWidth: 800,
+    minHeight: 300,
     // fullscreen: true,
     minimizable: true,
-    maximizable: true,
+    maximizable: false,
     title: "骑迹",
     // frame: false,
     // transparent: true,
-    icon: path.join(__dirname, 'icon_48.ico')
-  }
-  mainWindow = new BrowserWindow(opt)
+    icon: path.join(__dirname, "icon_48.ico")
+  };
+  mainWindow = new BrowserWindow(opt);
 
   // 加载一个本地页面
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'gaode.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "gaode.html"),
+      protocol: "file:",
+      slashes: true
+    })
+  );
 
   // 监听窗口关闭事件
-  mainWindow.on('closed', function() {
-    mainWindow = null
-  })
+  mainWindow.on("closed", function() {
+    mainWindow = null;
+  });
 
   // 设置进度条
   mainWindow.setProgressBar(0);
 
   // 不显示菜单
-  // mainWindow.setMenu(null);
+  mainWindow.setMenu(null);
 
   // ------------ 设置系统托盘 ------------
-  var trayMenuTemplate = [{
+  var trayMenuTemplate = [
+    {
       label: "设置",
       click: function() {}
     },
@@ -59,12 +62,12 @@ function createWindow() {
     }
   ];
   // 系统托盘图标
-  var tray = new Tray(path.join(__dirname, 'icon_48.ico'));
+  var tray = new Tray(path.join(__dirname, "icon_48.ico"));
   // 系统托盘右键菜单
   var contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
   tray.setContextMenu(contextMenu);
   // 系统托盘提示标题
-  tray.setToolTip('骑迹');
+  tray.setToolTip("骑迹");
 
   var webContents = mainWindow.webContents;
 
@@ -74,24 +77,23 @@ function createWindow() {
   //   webContents.send("clipboard-write", data);
   // });
 
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
-  })
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
+  });
 }
 
-
 // 加载完成后创建一个新的窗口
-app.on('ready', createWindow)
+app.on("ready", createWindow);
 
 // 关闭所有窗口事件
-app.on('window-all-closed', function() {
-  if (process.platform !== 'darwin') {
-    app.quit()
+app.on("window-all-closed", function() {
+  if (process.platform !== "darwin") {
+    app.quit();
   }
-})
+});
 
-app.on('activate', function() {
+app.on("activate", function() {
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
-})
+});

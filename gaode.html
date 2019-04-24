@@ -38,6 +38,7 @@
           display: none;
           background-color: rgba(0, 0, 0, .7);
           border: 2px solid rgb(9, 24, 38);
+          color: #fd6500;
         }
         .panel-log{
           margin: 50px;
@@ -56,7 +57,7 @@
           height: 600px;
         }
     </style>
-    <title>快速入门</title>
+    <title>我爱骑行</title>
 </head>
 
 <body>
@@ -85,17 +86,16 @@
 
         var map = new AMap.Map('container', {
             resizeEnable: true,
-            dragEnable: false,
+            dragEnable: true,
             keyboardEnable: false,
             doubleClickZoom: false
         });
 
 
         // 设置地图上要显示的东西
-        // map.setFeatures(["road", "bg"]);//单一种类要素显示
+        map.setFeatures(["road", "bg"]);//单一种类要素显示
 
         // 设置地图样式
-        // map.setMapStyle('amap://styles/d7d88bdfc8ecc5d8276744e3615099a7');
         map.setMapStyle('amap://styles/darkblue');
 
         marker = new AMap.Marker({
@@ -110,8 +110,8 @@
         var polyline = new AMap.Polyline({
             map: map,
             path: lineArr,
-            strokeColor: "#00A",  //线颜色
-            strokeOpacity: 0,     //线透明度
+            strokeColor: "#50e3c2",  //线颜色
+            strokeOpacity: .3,     //线透明度
             strokeWeight: 2,      //线宽
             strokeStyle: "solid"  //线样式
         });
@@ -122,7 +122,7 @@
             // path: lineArr,
             strokeColor: "#50e3c2",  //线颜色
             strokeOpacity: 1,     //线透明度
-            strokeWeight: 2,      //线宽
+            strokeWeight: 4,      //线宽
             strokeStyle: "solid"  //线样式
         });
 
